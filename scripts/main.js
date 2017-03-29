@@ -93,12 +93,12 @@ function checkAnswer(input, session, response) {
     response.sendText('Correct!');
     session.user.score = Math.max(1, session.user.score + 1);
   } else {
-    response.sendText(`Wrong :( it was ${question.c}`);
+    response.sendText(`Wrong :( it was "${question.c}"`);
     session.user.score = Math.max(0, session.user.score - 1);
   }
   response.sendText(`Your score is ${session.user.score}`);
   session.user.question_number++;
-  if (session.user.question_number < trivia[topic].length) {
+  if (session.user.question_number < trivia[session.user.topic].length) {
     // we still have questions, ask the next one
     response.goto('start');
   }
