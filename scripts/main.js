@@ -32,7 +32,9 @@ newScript() //
     buttons.send();
   })
   .expect
-    .button('')
+    .button((session, response) => {
+
+    })
     .text((session, response, stop) => {
     response.startScript(session.message.text);
     });
