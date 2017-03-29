@@ -66,6 +66,7 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
       response.sendText(answers.join(' or ')); 
       const buttons = response.createButtons();
       answers.forEach(answer => buttons.addButton('postback', answer, answer));
+      buttons.send();
     })
     /* 
      * The script will stop here because the next dialog is an expect dialog, which tells
