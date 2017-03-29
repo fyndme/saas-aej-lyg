@@ -58,7 +58,9 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
       response.sendText(`You are in the ${topic} section`);
       response.goto('start');
     })
-    .intent.
+    .intent.alwaus('games', 'score', (session, response) => {
+        response.sendText(`Your score is ${session.user.score}`);
+    })
     /* 
      * If the dialog doesn't call stop() then the script will automatically flow 
      * to the next dialog. We can also use named dialogs to move around a script
