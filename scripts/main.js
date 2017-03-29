@@ -60,6 +60,7 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
     })
     .intent.always('games', 'score', (session, response) => {
         response.sendText(`Your score is ${session.user.score}`);
+        response.goto('start');
     })
     /* 
      * If the dialog doesn't call stop() then the script will automatically flow 
