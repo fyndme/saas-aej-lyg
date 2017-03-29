@@ -22,16 +22,21 @@ addGreeting((user, response) => {
 
 newScript() // 
   .dialog('start', (session, response, stop) => {
-    response.sendText('Pick a trivia topic');
-    const topics = Object.keys(trivia).join(' or ');
-    response.sendText(topics);
+    const topics = Object.keys(trivia);
+
+    response.sendText(`Pick a trivia topic: ${topics.join(' or ')}`);
+
     const buttons = response.createButtons();
-    Object.keys(trivia).forEach(topic => {
+    buttons.addButton('postback', 'Check score', '@@check_score');
+    topics.forEach(topic => {
         buttons.addButton('postback', topic, topic);
     })
     buttons.send();
   })
   .expect
+    .button('@@check_score', (session, response) => {
+      response.sendText(`Your score is ${session.user.score}`);
+    })
     .button((session, response) => {
       response.startScript(session.message.payload);
     })
@@ -53,6 +58,7 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
       response.sendText(`You are in the ${topic} section`);
       response.goto('start');
     })
+    .intent.
     /* 
      * If the dialog doesn't call stop() then the script will automatically flow 
      * to the next dialog. We can also use named dialogs to move around a script
