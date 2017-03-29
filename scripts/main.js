@@ -25,7 +25,7 @@ newScript() //
     response.sendText('Pick a trivia topic');
     const topics = Object.keys(trivia).join(' or ');
     response.sendText(topics);
-    const buttons = response.sendButtons()
+    const buttons = response.createbuttons()
     Object.keys(trivia).forEach(topic => {
         buttons.addButton('postback', topic, topic);
     })
