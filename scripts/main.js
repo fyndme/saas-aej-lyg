@@ -91,7 +91,7 @@ function checkAnswer(input, session, response) {
   const question = trivia[session.user.topic][session.user.question_number];
   if (input === question.c) {
     response.sendText('Correct!');
-    session.user.score++;
+    session.user.score = Math.max(1, session.user.score + 1);
   } else {
     response.sendText(`Wrong :( it was ${question.c}`);
     session.user.score = Math.max(0, session.user.score - 1);
