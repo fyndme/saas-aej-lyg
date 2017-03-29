@@ -9,6 +9,7 @@ test('menu', function(){
     .expectText('Welcome to trivia time!')
     .expectText('Pick a trivia topic')
     .expectText('history or sports')
+    .expectButtons()
     .run();
 })
 

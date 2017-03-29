@@ -64,7 +64,9 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
       response
         .sendText(question.q)  
         .sendText(`Is it: ${answers.join(' or ')}`); //notice how you can chain responses (but don't have to!)
-      const buttons = response.createButtons();
+      const buttons = response
+        .createButtons()
+        .text('type or pick');
       answers.forEach(answer => buttons.addButton('postback', answer, answer));
       buttons.send();
     })
