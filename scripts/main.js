@@ -60,11 +60,10 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
      */
     .dialog('start', (session, response, stop) => {
       const question = trivia[topic][session.user.question_number];
+      const answers = question.w.concat(question.c); //exercise for the reader to shuffle these!
       response
         .sendText(question.q)  
-        .sendText('Is it:'); //notice how you can chain responses (but don't have to!)
-      const answers = question.w.concat(question.c); //exercise for the reader to shuffle these!
-      response.sendText(answers.join(' or ')); 
+        .sendText(`Is it: ${answers.join(' or ')}`); //notice how you can chain responses (but don't have to!)
       const buttons = response.createButtons();
       answers.forEach(answer => buttons.addButton('postback', answer, answer));
       buttons.send();
