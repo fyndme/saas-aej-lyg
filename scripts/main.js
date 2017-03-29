@@ -58,7 +58,7 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
       response.sendText(`You are in the ${topic} section`);
       response.goto('start');
     })
-    .intent.alwaus('games', 'score', (session, response) => {
+    .intent.always('games', 'score', (session, response) => {
         response.sendText(`Your score is ${session.user.score}`);
     })
     /* 
