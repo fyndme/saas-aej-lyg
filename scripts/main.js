@@ -1,16 +1,16 @@
 const trivia = {
   'history': [ // this is a trivia topic
-    { q: 'Question 1', // this is the question we will ask the user
-      w: ['a2', 'a3', 'a4'], // these are wrong answers
-      c: 'a1', // this is the correct answer
+    { q: 'When did this happen?', // this is the question we will ask the user
+      w: ['answer 2', 'answer 3', 'answer 4'], // these are wrong answers
+      c: 'answer 1', // this is the correct answer
      },
-     { q: 'Question 2', w: ['a2', 'a3', 'a4'], c: 'a1' },
-     { q: 'Question 3', w: ['a2', 'a3', 'a4'], c: 'a1' },
+     { q: 'When did that happen?', w: ['answer 2', 'answer 3', 'answer 4'], c: 'answer 1' },
+     { q: 'When will this happen?', w: ['answer 2', 'answer 3', 'answer 4'], c: 'answer 1' },
    ],
    'sports': [
-    { q: 'Question 1', w: ['a2', 'a3', 'a4'], c: 'a1' },
-    { q: 'Question 2', w: ['a2', 'a3', 'a4'], c: 'a1' },
-    { q: 'Question 3', w: ['a2', 'a3', 'a4'], c: 'a1' },
+    { q: 'Who did this?', w: ['answer 2', 'answer 3', 'answer 4'], c: 'answer 1' },
+    { q: 'Max score for that?', w: ['answer 2', 'answer 3', 'answer 4'], c: 'answer 1' },
+    { q: 'Best at this?', w: ['answer 2', 'answer 3', 'answer 4'], c: 'answer 1' },
    ],
 };
 
