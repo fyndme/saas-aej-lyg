@@ -87,7 +87,7 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
      */
 });
 
-function checkAnswer(input, sessions, response) {
+function checkAnswer(input, session, response) {
   const question = trivia[session.user.topic][session.user.question_number];
   if (input === question.c) {
     response.sendText('Correct!');
