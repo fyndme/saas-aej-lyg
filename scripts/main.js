@@ -33,10 +33,10 @@ newScript() //
   })
   .expect
     .button((session, response) => {
-
+      response.startScript(session.message.payload);
     })
     .text((session, response, stop) => {
-    response.startScript(session.message.text);
+      response.startScript(session.message.text);
     });
 
 Object.keys(trivia).forEach((topic) => { // iterate through each topic
