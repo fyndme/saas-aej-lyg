@@ -46,6 +46,7 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
      */
     .begin((session, response, stop) => { 
       response.sendText(`Time to test you on ${topic}!`);
+      session.user.topic = topic;
       session.user.question_number = 0; // Reset what question the user is on
     })
     .intent.always('general', 'help', (session, response) => {
@@ -87,7 +88,7 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
 });
 
 function checkAnswer(input, sessions, response) {
-  const question = trivia[topic][session.user.question_number];
+  const question = trivia[session.user.topic][session.user.question_number];
   if (input === question.c) {
     response.sendText('Correct!');
     session.user.score++;
