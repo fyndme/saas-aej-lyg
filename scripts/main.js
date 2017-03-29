@@ -31,9 +31,11 @@ newScript() //
     })
     buttons.send();
   })
-  .expect.text((session, response, stop) => {
+  .expect
+    .button('')
+    .text((session, response, stop) => {
     response.startScript(session.message.text);
-  });
+    });
 
 Object.keys(trivia).forEach((topic) => { // iterate through each topic
   newScript(topic) // a new script with the topic name
