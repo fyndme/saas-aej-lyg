@@ -25,7 +25,7 @@ newScript() //
     response.sendText('Pick a trivia topic');
     const topics = Object.keys(trivia).join(' or ');
     response.sendText(topics);
-    const buttons = response.createbuttons()
+    const buttons = response.createButtons();
     Object.keys(trivia).forEach(topic => {
         buttons.addButton('postback', topic, topic);
     })
@@ -62,31 +62,42 @@ Object.keys(trivia).forEach((topic) => { // iterate through each topic
       response
         .sendText(question.q)  
         .sendText('Is it:'); //notice how you can chain responses (but don't have to!)
-      response.sendText(question.w.concat(question.c).join(' or ')); //exercise for the reader to shuffle these!
+      const answers = question.w.concat(question.c); //exercise for the reader to shuffle these!
+      response.sendText(answers.join(' or ')); 
+      const buttons = response.createButtons();
+      answers.forEach(answer => buttons.addButton('postback', answer, answer));
     })
     /* 
      * The script will stop here because the next dialog is an expect dialog, which tells
      * alana to wait for input from the user. We can even specialize the expect to only 
      * response to a text message.
      */
-    .expect.text((session, response, stop) => {
-      const question = trivia[topic][session.user.question_number];
-      if (session.message.text === question.c) {
-        response.sendText('Correct!');
-        session.user.score++;
-      } else {
-        response.sendText(`Wrong :( it was ${question.c}`);
-        session.user.score = Math.max(0, session.user.score - 1);
-      }
-      response.sendText(`Your score is ${session.user.score}`);
-      session.user.question_number++;
-      if (session.user.question_number < trivia[topic].length) {
-        // we still have questions, ask the next one
-        response.goto('start');
-       }
-    });
+    .expect
+      .button((session, response, stop) => {
+        checkAnswer(session.message.payload, session, response);
+      })
+      .text((session, response, stop) => {
+        checkAnswer(session.message.text, session, response);
+      });
     /* 
      * At the end of script, alana will automatically move the user to the default
      * script, usually the main menu
      */
 });
+
+function checkAnswer(input, sessions, response) {
+  const question = trivia[topic][session.user.question_number];
+  if (input === question.c) {
+    response.sendText('Correct!');
+    session.user.score++;
+  } else {
+    response.sendText(`Wrong :( it was ${question.c}`);
+    session.user.score = Math.max(0, session.user.score - 1);
+  }
+  response.sendText(`Your score is ${session.user.score}`);
+  session.user.question_number++;
+  if (session.user.question_number < trivia[topic].length) {
+    // we still have questions, ask the next one
+    response.goto('start');
+  }
+}
